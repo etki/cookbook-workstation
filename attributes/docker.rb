@@ -1,0 +1,1 @@
+default['workstation']['docker']['images'] = %w(ubuntu alpine)

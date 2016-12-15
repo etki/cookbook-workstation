@@ -1,0 +1,1 @@
+default['workstation']['git']['version'] = '2.7.4'

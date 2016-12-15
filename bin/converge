@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+PROJECT_ROOT="$( cd "$( dirname "$( dirname "${BASH_SOURCE[0]}" )" )" && pwd )"
+TARGET="/tmp/workstation/cookbooks"
+
+mkdir -p "$TARGET"
+berks vendor -b "$PROJECT_ROOT/Berksfile" "$TARGET"
+cd "$( dirname "$TARGET" )" && chef-client -z -o 'workstation::default'
