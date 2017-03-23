@@ -1,1 +1,20 @@
-default['workstation']['docker']['images'] = %w(ubuntu alpine)
+default['workstation']['docker']['images'] = %w(
+  ubuntu
+  ubuntu:12.04
+  ubuntu:14.04
+  ubuntu:16.04
+  alpine
+  alpine:3.1
+  alpine:3.2
+  alpine:3.3
+  alpine:3.4
+  alpine:3.5
+  debian
+  debian:7
+  debian:8
+  debian:9
+  centos
+  centos:5
+  centos:6
+  centos:7
+)

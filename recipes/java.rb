@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: workstation
-# Recipe:: default
+# Recipe:: java
 #
 # Copyright 2016, Etki
 #
@@ -24,8 +24,11 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-recipes = %w{chef git docker java maven ruby node vagrant phantomjs chrome}
+package 'openjdk-8-jdk'
+package 'openjdk-8-source'
 
-recipes.each do |recipe|
-  include_recipe "::#{recipe}"
+# todo
+file '/etc/profile.d/jdk.sh' do
+  content "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64\n"
+  mode '0755'
 end

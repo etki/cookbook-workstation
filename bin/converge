@@ -3,7 +3,7 @@
 set -e
 
 PROJECT_ROOT="$( cd "$( dirname "$( dirname "${BASH_SOURCE[0]}" )" )" && pwd )"
-TARGET="/tmp/workstation/cookbooks"
+TARGET="$PROJECT_ROOT/tmp/cookbooks"
 
 mkdir -p "$TARGET"
 berks vendor -b "$PROJECT_ROOT/Berksfile" "$TARGET"

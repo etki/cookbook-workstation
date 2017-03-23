@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: workstation
-# Recipe:: default
+# Recipe:: ruby
 #
 # Copyright 2016, Etki
 #
@@ -24,8 +24,24 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-recipes = %w{chef git docker java maven ruby node vagrant phantomjs chrome}
+target_user = node['workstation']['machine']['target_user']
+node.default['rvm']['group_users'] = [node['workstation']['machine']['target_user']]
 
-recipes.each do |recipe|
-  include_recipe "::#{recipe}"
+execute 'gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3'
+execute 'curl -sSL https://get.rvm.io | bash -s stable'
+
+include_recipe 'rvm::system'
+
+versions = node['workstation']['ruby']['versions']
+if versions.any?
+  versions.each do |version|
+    rvm_ruby version
+    node['workstation']['ruby']['gems'].each do |gem|
+      rvm_gem gem do
+        ruby_string version
+        ignore_failure true
+      end
+    end
+  end
+  rvm_default_ruby versions.last
 end

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: workstation
-# Recipe:: default
+# Recipe:: vagrant
 #
 # Copyright 2016, Etki
 #
@@ -24,8 +24,4 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-recipes = %w{chef git docker java maven ruby node vagrant phantomjs chrome}
-
-recipes.each do |recipe|
-  include_recipe "::#{recipe}"
-end
+include_recipe 'vagrant'

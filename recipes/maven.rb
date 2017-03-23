@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: workstation
-# Recipe:: default
+# Recipe:: maven
 #
 # Copyright 2016, Etki
 #
@@ -24,8 +24,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-recipes = %w{chef git docker java maven ruby node vagrant phantomjs chrome}
-
-recipes.each do |recipe|
-  include_recipe "::#{recipe}"
+remote_file '/usr/local/bin/mvn' do
+  source 'https://bitbucket.org/mjensen/mvnvm/raw/mvnvm-1.0.9/mvn'
+  mode '0755'
 end

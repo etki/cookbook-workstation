@@ -7,7 +7,7 @@ Probably you will never need it.
 
 ### Platforms
 
-- Ubuntu
+Linux Mint. Ubuntu/Debian someday. May be Arch once.
 
 ### Chef
 
@@ -22,7 +22,7 @@ Probably you will never need it.
 - `docker`
 - `chrome`
 - `chromedriver`
-- `phantom`
+- `phantomjs2`
 
 ## Attributes
 
@@ -31,50 +31,31 @@ Probably you will never need it.
 
 TBD
 
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['workstation']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+| Key | Type | Description | Default |
+|:----|:-----|:------------|:--------|
 
 ## Usage
 
 ### workstation::default
 
-TODO: Write usage instructions for each cookbook.
+Gathers all other recipes and installs everything using them.
 
-e.g.
-Just include `workstation` in your node's `run_list`:
+## Resources
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[workstation]"
-  ]
-}
+### setup_workstation_chef
+
+Installs additional gems for Chef DK that will be needed during cookbook 
+development.
+
+```ruby
+setup_workstation_chef 'default' do
+  gems %w(a b c) # defaults to node['workstation']['chef']['gems']
+end
 ```
 
 ## Contributing
 
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+Just fork the repo and send pull request for dev branch.
 
 ## License and Authors
 

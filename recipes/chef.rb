@@ -1,0 +1,1 @@
+setup_workstation_chef 'default'

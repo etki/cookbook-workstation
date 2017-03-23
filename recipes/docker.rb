@@ -24,9 +24,28 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
 
-docker_service 'default' do
-  action [:create, :start]
+docker_installation 'default' do
+  action [:create]
 end
+# todo: this has been added because chef has tried to connect to upstart
+# on linux mint
+# this should be fixed when possible
+docker_service_manager_systemd 'default' do
+  host ['unix:///var/run/docker.sock', 'tcp://127.0.0.1:2376']
+  action [:start]
+end
+
 node['workstation']['docker']['images'].each do |image|
-  docker_image image
+  segments = image.split(':')
+  repo = segments[0]
+  tag = segments.size > 1 ? segments[1] : 'latest'
+  docker_image "#{repo}:#{tag}" do
+    repo repo
+    tag tag
+  end
+end
+
+group 'docker' do
+  append true
+  members [node['workstation']['machine']['target_user']]
 end
